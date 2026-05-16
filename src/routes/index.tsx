@@ -1084,13 +1084,16 @@ function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {websiteProjects.map((project, index) => (
-              <motion.div
+              <motion.a
                 key={project.id}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.05 }}
-                className="group"
+                className="group cursor-pointer"
               >
                 <div className="glass rounded-2xl overflow-hidden neon-border-hover transition-all hover:scale-105">
                   <div className="p-4 border-b border-border/50">
@@ -1098,19 +1101,9 @@ function Home() {
                       <h3 className="font-display text-lg font-semibold group-hover:text-primary transition-colors">
                         {project.name}
                       </h3>
-                      {project.url && (
-                        <a
-                          href={project.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs text-primary hover:text-primary-glow transition-colors flex items-center gap-1"
-                        >
-                          Visit
-                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                        </a>
-                      )}
+                      <svg className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
                     </div>
                   </div>
                   
@@ -1123,7 +1116,7 @@ function Home() {
                     />
                   </div>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
         </div>
