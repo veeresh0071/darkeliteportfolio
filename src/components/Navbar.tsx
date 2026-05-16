@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import logoImage from "./image1.png";
-import { ThemeToggle } from "./ThemeToggle";
 
 type NavLink = { to: string; label: string };
 const links: NavLink[] = [
@@ -63,7 +62,6 @@ export function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3 ml-auto">
-            <ThemeToggle />
             <a
               href="#contact"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-primary-glow px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_var(--glow-red)] hover:shadow-[0_0_36px_var(--glow-red-strong)] transition-all hover:scale-[1.03]"
@@ -73,7 +71,6 @@ export function Navbar() {
           </div>
 
           <div className="lg:hidden flex items-center gap-2 ml-auto">
-            <ThemeToggle />
             <button
               className="grid place-items-center h-10 w-10 rounded-lg glass"
               onClick={() => setOpen((v) => !v)}

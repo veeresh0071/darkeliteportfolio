@@ -5,10 +5,10 @@ import {
   createRootRouteWithContext,
   useRouter,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import { Navbar } from "@/components/Navbar";
 import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/contexts/ThemeContext";
 
 function NotFoundComponent() {
   return (
@@ -74,13 +74,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootComponent() {
+  // Force dark theme
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+  }, []);
+
   return (
-    <ThemeProvider>
+    <>
       <Navbar />
       <main className="relative z-10 pt-20">
         <Outlet />
       </main>
       <Toaster />
-    </ThemeProvider>
+    </>
   );
 }
