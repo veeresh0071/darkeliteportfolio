@@ -9,327 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PortfolioRouteImport } from './routes/portfolio'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CareerRouteImport } from './routes/career'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesIndexRouteImport } from './routes/services.index'
-import { Route as ServicesWebsiteDevelopmentRouteImport } from './routes/services.website-development'
-import { Route as ServicesUiUxDesigningRouteImport } from './routes/services.ui-ux-designing'
-import { Route as ServicesProductionRouteImport } from './routes/services.production'
-import { Route as ServicesPrintRouteImport } from './routes/services.print'
-import { Route as ServicesGraphicDesigningRouteImport } from './routes/services.graphic-designing'
-import { Route as ServicesDigitalMarketingRouteImport } from './routes/services.digital-marketing'
-import { Route as ServicesAppDevelopmentRouteImport } from './routes/services.app-development'
-import { Route as ServicesAnimationRouteImport } from './routes/services.animation'
-import { Route as PortfolioWebsiteDevelopmentRouteImport } from './routes/portfolio_.website-development'
-import { Route as PortfolioUiUxDesignRouteImport } from './routes/portfolio_.ui-ux-design'
-import { Route as PortfolioGraphicDesignRouteImport } from './routes/portfolio_.graphic-design'
-import { Route as BlogPostIdRouteImport } from './routes/blog.$postId'
-import { Route as ApplyJobTitleRouteImport } from './routes/apply.$jobTitle'
 
-const PortfolioRoute = PortfolioRouteImport.update({
-  id: '/portfolio',
-  path: '/portfolio',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CareerRoute = CareerRouteImport.update({
-  id: '/career',
-  path: '/career',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesIndexRoute = ServicesIndexRouteImport.update({
-  id: '/services/',
-  path: '/services/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesWebsiteDevelopmentRoute =
-  ServicesWebsiteDevelopmentRouteImport.update({
-    id: '/services/website-development',
-    path: '/services/website-development',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesUiUxDesigningRoute = ServicesUiUxDesigningRouteImport.update({
-  id: '/services/ui-ux-designing',
-  path: '/services/ui-ux-designing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesProductionRoute = ServicesProductionRouteImport.update({
-  id: '/services/production',
-  path: '/services/production',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesPrintRoute = ServicesPrintRouteImport.update({
-  id: '/services/print',
-  path: '/services/print',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesGraphicDesigningRoute =
-  ServicesGraphicDesigningRouteImport.update({
-    id: '/services/graphic-designing',
-    path: '/services/graphic-designing',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesDigitalMarketingRoute =
-  ServicesDigitalMarketingRouteImport.update({
-    id: '/services/digital-marketing',
-    path: '/services/digital-marketing',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesAppDevelopmentRoute = ServicesAppDevelopmentRouteImport.update({
-  id: '/services/app-development',
-  path: '/services/app-development',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesAnimationRoute = ServicesAnimationRouteImport.update({
-  id: '/services/animation',
-  path: '/services/animation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortfolioWebsiteDevelopmentRoute =
-  PortfolioWebsiteDevelopmentRouteImport.update({
-    id: '/portfolio_/website-development',
-    path: '/portfolio/website-development',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const PortfolioUiUxDesignRoute = PortfolioUiUxDesignRouteImport.update({
-  id: '/portfolio_/ui-ux-design',
-  path: '/portfolio/ui-ux-design',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortfolioGraphicDesignRoute = PortfolioGraphicDesignRouteImport.update({
-  id: '/portfolio_/graphic-design',
-  path: '/portfolio/graphic-design',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogPostIdRoute = BlogPostIdRouteImport.update({
-  id: '/$postId',
-  path: '/$postId',
-  getParentRoute: () => BlogRoute,
-} as any)
-const ApplyJobTitleRoute = ApplyJobTitleRouteImport.update({
-  id: '/apply/$jobTitle',
-  path: '/apply/$jobTitle',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/blog': typeof BlogRouteWithChildren
-  '/career': typeof CareerRoute
-  '/contact': typeof ContactRoute
-  '/portfolio': typeof PortfolioRoute
-  '/apply/$jobTitle': typeof ApplyJobTitleRoute
-  '/blog/$postId': typeof BlogPostIdRoute
-  '/portfolio/graphic-design': typeof PortfolioGraphicDesignRoute
-  '/portfolio/ui-ux-design': typeof PortfolioUiUxDesignRoute
-  '/portfolio/website-development': typeof PortfolioWebsiteDevelopmentRoute
-  '/services/animation': typeof ServicesAnimationRoute
-  '/services/app-development': typeof ServicesAppDevelopmentRoute
-  '/services/digital-marketing': typeof ServicesDigitalMarketingRoute
-  '/services/graphic-designing': typeof ServicesGraphicDesigningRoute
-  '/services/print': typeof ServicesPrintRoute
-  '/services/production': typeof ServicesProductionRoute
-  '/services/ui-ux-designing': typeof ServicesUiUxDesigningRoute
-  '/services/website-development': typeof ServicesWebsiteDevelopmentRoute
-  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/blog': typeof BlogRouteWithChildren
-  '/career': typeof CareerRoute
-  '/contact': typeof ContactRoute
-  '/portfolio': typeof PortfolioRoute
-  '/apply/$jobTitle': typeof ApplyJobTitleRoute
-  '/blog/$postId': typeof BlogPostIdRoute
-  '/portfolio/graphic-design': typeof PortfolioGraphicDesignRoute
-  '/portfolio/ui-ux-design': typeof PortfolioUiUxDesignRoute
-  '/portfolio/website-development': typeof PortfolioWebsiteDevelopmentRoute
-  '/services/animation': typeof ServicesAnimationRoute
-  '/services/app-development': typeof ServicesAppDevelopmentRoute
-  '/services/digital-marketing': typeof ServicesDigitalMarketingRoute
-  '/services/graphic-designing': typeof ServicesGraphicDesigningRoute
-  '/services/print': typeof ServicesPrintRoute
-  '/services/production': typeof ServicesProductionRoute
-  '/services/ui-ux-designing': typeof ServicesUiUxDesigningRoute
-  '/services/website-development': typeof ServicesWebsiteDevelopmentRoute
-  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/blog': typeof BlogRouteWithChildren
-  '/career': typeof CareerRoute
-  '/contact': typeof ContactRoute
-  '/portfolio': typeof PortfolioRoute
-  '/apply/$jobTitle': typeof ApplyJobTitleRoute
-  '/blog/$postId': typeof BlogPostIdRoute
-  '/portfolio_/graphic-design': typeof PortfolioGraphicDesignRoute
-  '/portfolio_/ui-ux-design': typeof PortfolioUiUxDesignRoute
-  '/portfolio_/website-development': typeof PortfolioWebsiteDevelopmentRoute
-  '/services/animation': typeof ServicesAnimationRoute
-  '/services/app-development': typeof ServicesAppDevelopmentRoute
-  '/services/digital-marketing': typeof ServicesDigitalMarketingRoute
-  '/services/graphic-designing': typeof ServicesGraphicDesigningRoute
-  '/services/print': typeof ServicesPrintRoute
-  '/services/production': typeof ServicesProductionRoute
-  '/services/ui-ux-designing': typeof ServicesUiUxDesigningRoute
-  '/services/website-development': typeof ServicesWebsiteDevelopmentRoute
-  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/blog'
-    | '/career'
-    | '/contact'
-    | '/portfolio'
-    | '/apply/$jobTitle'
-    | '/blog/$postId'
-    | '/portfolio/graphic-design'
-    | '/portfolio/ui-ux-design'
-    | '/portfolio/website-development'
-    | '/services/animation'
-    | '/services/app-development'
-    | '/services/digital-marketing'
-    | '/services/graphic-designing'
-    | '/services/print'
-    | '/services/production'
-    | '/services/ui-ux-designing'
-    | '/services/website-development'
-    | '/services/'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/blog'
-    | '/career'
-    | '/contact'
-    | '/portfolio'
-    | '/apply/$jobTitle'
-    | '/blog/$postId'
-    | '/portfolio/graphic-design'
-    | '/portfolio/ui-ux-design'
-    | '/portfolio/website-development'
-    | '/services/animation'
-    | '/services/app-development'
-    | '/services/digital-marketing'
-    | '/services/graphic-designing'
-    | '/services/print'
-    | '/services/production'
-    | '/services/ui-ux-designing'
-    | '/services/website-development'
-    | '/services'
-  id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/blog'
-    | '/career'
-    | '/contact'
-    | '/portfolio'
-    | '/apply/$jobTitle'
-    | '/blog/$postId'
-    | '/portfolio_/graphic-design'
-    | '/portfolio_/ui-ux-design'
-    | '/portfolio_/website-development'
-    | '/services/animation'
-    | '/services/app-development'
-    | '/services/digital-marketing'
-    | '/services/graphic-designing'
-    | '/services/print'
-    | '/services/production'
-    | '/services/ui-ux-designing'
-    | '/services/website-development'
-    | '/services/'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  BlogRoute: typeof BlogRouteWithChildren
-  CareerRoute: typeof CareerRoute
-  ContactRoute: typeof ContactRoute
-  PortfolioRoute: typeof PortfolioRoute
-  ApplyJobTitleRoute: typeof ApplyJobTitleRoute
-  PortfolioGraphicDesignRoute: typeof PortfolioGraphicDesignRoute
-  PortfolioUiUxDesignRoute: typeof PortfolioUiUxDesignRoute
-  PortfolioWebsiteDevelopmentRoute: typeof PortfolioWebsiteDevelopmentRoute
-  ServicesAnimationRoute: typeof ServicesAnimationRoute
-  ServicesAppDevelopmentRoute: typeof ServicesAppDevelopmentRoute
-  ServicesDigitalMarketingRoute: typeof ServicesDigitalMarketingRoute
-  ServicesGraphicDesigningRoute: typeof ServicesGraphicDesigningRoute
-  ServicesPrintRoute: typeof ServicesPrintRoute
-  ServicesProductionRoute: typeof ServicesProductionRoute
-  ServicesUiUxDesigningRoute: typeof ServicesUiUxDesigningRoute
-  ServicesWebsiteDevelopmentRoute: typeof ServicesWebsiteDevelopmentRoute
-  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/portfolio': {
-      id: '/portfolio'
-      path: '/portfolio'
-      fullPath: '/portfolio'
-      preLoaderRoute: typeof PortfolioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/career': {
-      id: '/career'
-      path: '/career'
-      fullPath: '/career'
-      preLoaderRoute: typeof CareerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -337,137 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/': {
-      id: '/services/'
-      path: '/services'
-      fullPath: '/services/'
-      preLoaderRoute: typeof ServicesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/website-development': {
-      id: '/services/website-development'
-      path: '/services/website-development'
-      fullPath: '/services/website-development'
-      preLoaderRoute: typeof ServicesWebsiteDevelopmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/ui-ux-designing': {
-      id: '/services/ui-ux-designing'
-      path: '/services/ui-ux-designing'
-      fullPath: '/services/ui-ux-designing'
-      preLoaderRoute: typeof ServicesUiUxDesigningRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/production': {
-      id: '/services/production'
-      path: '/services/production'
-      fullPath: '/services/production'
-      preLoaderRoute: typeof ServicesProductionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/print': {
-      id: '/services/print'
-      path: '/services/print'
-      fullPath: '/services/print'
-      preLoaderRoute: typeof ServicesPrintRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/graphic-designing': {
-      id: '/services/graphic-designing'
-      path: '/services/graphic-designing'
-      fullPath: '/services/graphic-designing'
-      preLoaderRoute: typeof ServicesGraphicDesigningRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/digital-marketing': {
-      id: '/services/digital-marketing'
-      path: '/services/digital-marketing'
-      fullPath: '/services/digital-marketing'
-      preLoaderRoute: typeof ServicesDigitalMarketingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/app-development': {
-      id: '/services/app-development'
-      path: '/services/app-development'
-      fullPath: '/services/app-development'
-      preLoaderRoute: typeof ServicesAppDevelopmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/animation': {
-      id: '/services/animation'
-      path: '/services/animation'
-      fullPath: '/services/animation'
-      preLoaderRoute: typeof ServicesAnimationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portfolio_/website-development': {
-      id: '/portfolio_/website-development'
-      path: '/portfolio/website-development'
-      fullPath: '/portfolio/website-development'
-      preLoaderRoute: typeof PortfolioWebsiteDevelopmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portfolio_/ui-ux-design': {
-      id: '/portfolio_/ui-ux-design'
-      path: '/portfolio/ui-ux-design'
-      fullPath: '/portfolio/ui-ux-design'
-      preLoaderRoute: typeof PortfolioUiUxDesignRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portfolio_/graphic-design': {
-      id: '/portfolio_/graphic-design'
-      path: '/portfolio/graphic-design'
-      fullPath: '/portfolio/graphic-design'
-      preLoaderRoute: typeof PortfolioGraphicDesignRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog/$postId': {
-      id: '/blog/$postId'
-      path: '/$postId'
-      fullPath: '/blog/$postId'
-      preLoaderRoute: typeof BlogPostIdRouteImport
-      parentRoute: typeof BlogRoute
-    }
-    '/apply/$jobTitle': {
-      id: '/apply/$jobTitle'
-      path: '/apply/$jobTitle'
-      fullPath: '/apply/$jobTitle'
-      preLoaderRoute: typeof ApplyJobTitleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
-interface BlogRouteChildren {
-  BlogPostIdRoute: typeof BlogPostIdRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogPostIdRoute: BlogPostIdRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  BlogRoute: BlogRouteWithChildren,
-  CareerRoute: CareerRoute,
-  ContactRoute: ContactRoute,
-  PortfolioRoute: PortfolioRoute,
-  ApplyJobTitleRoute: ApplyJobTitleRoute,
-  PortfolioGraphicDesignRoute: PortfolioGraphicDesignRoute,
-  PortfolioUiUxDesignRoute: PortfolioUiUxDesignRoute,
-  PortfolioWebsiteDevelopmentRoute: PortfolioWebsiteDevelopmentRoute,
-  ServicesAnimationRoute: ServicesAnimationRoute,
-  ServicesAppDevelopmentRoute: ServicesAppDevelopmentRoute,
-  ServicesDigitalMarketingRoute: ServicesDigitalMarketingRoute,
-  ServicesGraphicDesigningRoute: ServicesGraphicDesigningRoute,
-  ServicesPrintRoute: ServicesPrintRoute,
-  ServicesProductionRoute: ServicesProductionRoute,
-  ServicesUiUxDesigningRoute: ServicesUiUxDesigningRoute,
-  ServicesWebsiteDevelopmentRoute: ServicesWebsiteDevelopmentRoute,
-  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

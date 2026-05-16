@@ -7,11 +7,8 @@ import {
 } from "@tanstack/react-router";
 
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { CursorGlow } from "@/components/CursorGlow";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { PageTransition } from "@/components/PageTransition";
 
 function NotFoundComponent() {
   return (
@@ -79,15 +76,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootComponent() {
   return (
     <ThemeProvider>
-      <PageTransition>
-        <CursorGlow />
-        <Navbar />
-        <main className="relative z-10 pt-20">
-          <Outlet />
-        </main>
-        <Footer />
-        <Toaster />
-      </PageTransition>
+      <Navbar />
+      <main className="relative z-10 pt-20">
+        <Outlet />
+      </main>
+      <Toaster />
     </ThemeProvider>
   );
 }
