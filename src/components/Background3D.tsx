@@ -52,12 +52,14 @@ export function Background3D() {
       
       {/* 1. Dynamic Cursor Glowing Spotlight */}
       <motion.div
-        className="absolute w-[900px] h-[900px] rounded-full -translate-x-1/2 -translate-y-1/2 opacity-40 mix-blend-screen pointer-events-none"
+        className="absolute w-[900px] h-[900px] rounded-full opacity-40 mix-blend-screen pointer-events-none"
         style={{
-          left: glowX,
-          top: glowY,
-          background: "radial-gradient(circle, rgba(220,38,38,0.18) 0%, rgba(147,51,234,0.06) 45%, transparent 75%)",
-          filter: "blur(50px)",
+          x: glowX,
+          y: glowY,
+          left: -450,
+          top: -450,
+          background: "radial-gradient(circle, rgba(220,38,38,0.2) 0%, rgba(147,51,234,0.08) 40%, transparent 70%)",
+          willChange: "transform",
         }}
       />
 
@@ -146,13 +148,14 @@ export function Background3D() {
       {largeOrbs.map((orb) => (
         <motion.div
           key={`large-${orb.id}`}
-          className="absolute rounded-full bg-gradient-to-br from-primary/15 to-primary-glow/5"
+          className="absolute rounded-full"
           style={{
             left: orb.left,
             top: orb.top,
             width: orb.size,
             height: orb.size,
-            filter: "blur(6px)",
+            background: "radial-gradient(circle, rgba(220,38,38,0.12) 0%, rgba(147,51,234,0.04) 50%, transparent 70%)",
+            willChange: "transform, opacity",
           }}
           animate={{
             opacity: [0.25, 0.75, 0.25],
@@ -173,8 +176,8 @@ export function Background3D() {
         <motion.div 
           className="absolute -top-[20%] -left-[20%] w-[140%] h-[140%] pointer-events-none"
           style={{
-            background: "radial-gradient(circle at 40% 30%, rgba(220, 38, 38, 0.15), rgba(126, 34, 206, 0.08), transparent 60%)",
-            filter: "blur(70px)",
+            background: "radial-gradient(circle at 40% 30%, rgba(220, 38, 38, 0.16) 0%, rgba(126, 34, 206, 0.08) 40%, transparent 70%)",
+            willChange: "transform, opacity",
           }}
           animate={{
             x: [-60, 60, -60],
@@ -192,8 +195,8 @@ export function Background3D() {
         <motion.div 
           className="absolute -bottom-[20%] -right-[20%] w-[140%] h-[140%] pointer-events-none"
           style={{
-            background: "radial-gradient(circle at 60% 70%, rgba(220, 38, 38, 0.12), rgba(244, 63, 94, 0.05), transparent 65%)",
-            filter: "blur(90px)",
+            background: "radial-gradient(circle at 60% 70%, rgba(220, 38, 38, 0.12) 0%, rgba(244, 63, 94, 0.05) 45%, transparent 70%)",
+            willChange: "transform, opacity",
           }}
           animate={{
             x: [50, -50, 50],
@@ -211,8 +214,8 @@ export function Background3D() {
         <motion.div 
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.04), transparent 70%)",
-            filter: "blur(50px)",
+            background: "radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.05) 0%, transparent 70%)",
+            willChange: "transform, opacity",
           }}
           animate={{
             opacity: [0.3, 0.7, 0.3],

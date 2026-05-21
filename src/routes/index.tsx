@@ -754,8 +754,8 @@ function Home() {
           <motion.div 
             className="absolute top-0 -left-1/4 w-[150%] h-[150%] opacity-20 pointer-events-none"
             style={{
-              background: "radial-gradient(circle at 30% 20%, rgba(220, 38, 38, 0.22), rgba(126, 34, 206, 0.12), transparent 55%)",
-              filter: "blur(90px)",
+              background: "radial-gradient(circle at 30% 20%, rgba(220, 38, 38, 0.22) 0%, rgba(126, 34, 206, 0.12) 35%, transparent 65%)",
+              willChange: "transform, opacity",
             }}
             animate={{
               x: [-50, 50, -50],
@@ -773,8 +773,8 @@ function Home() {
           <motion.div 
             className="absolute bottom-0 -right-1/4 w-[150%] h-[150%] opacity-15 pointer-events-none"
             style={{
-              background: "radial-gradient(circle at 75% 80%, rgba(220, 38, 38, 0.18), rgba(244, 63, 94, 0.08), transparent 60%)",
-              filter: "blur(110px)",
+              background: "radial-gradient(circle at 75% 80%, rgba(220, 38, 38, 0.18) 0%, rgba(244, 63, 94, 0.08) 40%, transparent 70%)",
+              willChange: "transform, opacity",
             }}
             animate={{
               x: [40, -40, 40],
@@ -792,8 +792,8 @@ function Home() {
           <motion.div 
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: "radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.06), transparent 75%)",
-              filter: "blur(70px)",
+              background: "radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.07) 0%, transparent 70%)",
+              willChange: "transform, opacity",
             }}
             animate={{
               opacity: [0.25, 0.8, 0.35, 0.9, 0.25],
