@@ -2,15 +2,15 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import logoImage from "./image1.png";
+import logoIcon from "./logo-icon.png";
+import logoBanner from "./image1.png";
 
-type NavLink = { to: string; label: string };
+type NavLink = { hash: string; label: string };
 const links: NavLink[] = [
-  { to: "#home", label: "Home" },
-  { to: "#about", label: "About" },
-  { to: "#clients", label: "Clients" },
-  { to: "#works", label: "Works" },
-  { to: "#contact", label: "Contact" },
+  { hash: "home", label: "Home" },
+  { hash: "clients", label: "Our Clients" },
+  { hash: "about", label: "Projects" },
+  { hash: "contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -29,45 +29,58 @@ export function Navbar() {
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-3" : "py-5"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? "py-3" : "py-5"
+        }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div
-          className={`flex items-center rounded-2xl px-4 sm:px-6 py-3 transition-all duration-500 ${
-            scrolled ? "glass-strong shadow-[0_8px_32px_rgba(0,0,0,0.4)]" : "bg-transparent"
-          }`}
-        >
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="relative grid place-items-center h-12 w-auto bg-white/10 rounded-lg px-3 backdrop-blur-sm transition-all duration-300 group-hover:bg-white/15">
-              <img 
-                src={logoImage} 
-                alt="Dark Elite Creations Logo" 
-                className="h-10 w-auto object-contain brightness-125 contrast-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-transform duration-300 group-hover:scale-105" 
-              />
-            </div>
+        <div className="flex items-center gap-8">
+
+          {/* logo-icon.png — outside the navbar pill */}
+          <Link to="/" className="flex-shrink-0 group z-10">
+            <img
+              src={logoIcon}
+              alt="Dark Elite Creations Icon"
+              className="h-14 w-14 object-contain drop-shadow-[0_0_14px_rgba(220,38,38,0.6)] transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_24px_rgba(220,38,38,0.9)]"
+            />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1 ml-8">
+          <div
+            className={`relative flex flex-1 items-center rounded-2xl px-4 sm:px-6 py-3 transition-all duration-500 ${scrolled ? "glass-strong shadow-[0_8px_32px_rgba(0,0,0,0.4)]" : "bg-transparent"
+            }`}
+          >
+          {/* Banner — left anchor inside the navbar pill */}
+          <Link to="/" className="flex items-center group flex-shrink-0">
+            <img
+              src={logoBanner}
+              alt="Dark Elite Creations"
+              className="h-10 w-auto object-contain transition-all duration-300 group-hover:scale-102 drop-shadow-[0_0_12px_rgba(220,38,38,0.25)]"
+              style={{ filter: "invert(1) hue-rotate(180deg)" }}
+            />
+          </Link>
+
+          {/* Nav links — perfectly centered in the navbar */}
+          <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {links.map((l) => (
-              <a
-                key={l.to}
-                href={l.to}
+              <Link
+                key={l.hash}
+                to="/"
+                hash={l.hash}
                 className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3 ml-auto">
-            <a
-              href="#contact"
+          {/* CTA — right side */}
+          <div className="hidden lg:flex items-center gap-3 ml-auto flex-shrink-0">
+            <Link
+              to="/"
+              hash="contact"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-primary-glow px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_var(--glow-red)] hover:shadow-[0_0_36px_var(--glow-red-strong)] transition-all hover:scale-[1.03]"
             >
               Start a Project
-            </a>
+            </Link>
           </div>
 
           <div className="lg:hidden flex items-center gap-2 ml-auto">
@@ -78,6 +91,7 @@ export function Navbar() {
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
+          </div>
           </div>
         </div>
 
@@ -90,14 +104,15 @@ export function Navbar() {
               className="lg:hidden mt-2 glass-strong rounded-2xl p-3 max-h-[80vh] overflow-y-auto"
             >
               {links.map((l) => (
-                <a
-                  key={l.to}
-                  href={l.to}
+                <Link
+                  key={l.hash}
+                  to="/"
+                  hash={l.hash}
                   onClick={() => setOpen(false)}
                   className="block px-4 py-3 text-sm font-medium rounded-lg hover:bg-white/5"
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
             </motion.div>
           )}

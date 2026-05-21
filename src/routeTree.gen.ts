@@ -9,8 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WebsiteDevelopmentRouteImport } from './routes/website-development'
+import { Route as UiUxDesignRouteImport } from './routes/ui-ux-design'
+import { Route as GraphicDesignRouteImport } from './routes/graphic-design'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WebsiteDevelopmentRoute = WebsiteDevelopmentRouteImport.update({
+  id: '/website-development',
+  path: '/website-development',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UiUxDesignRoute = UiUxDesignRouteImport.update({
+  id: '/ui-ux-design',
+  path: '/ui-ux-design',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GraphicDesignRoute = GraphicDesignRouteImport.update({
+  id: '/graphic-design',
+  path: '/graphic-design',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +37,66 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/graphic-design': typeof GraphicDesignRoute
+  '/ui-ux-design': typeof UiUxDesignRoute
+  '/website-development': typeof WebsiteDevelopmentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/graphic-design': typeof GraphicDesignRoute
+  '/ui-ux-design': typeof UiUxDesignRoute
+  '/website-development': typeof WebsiteDevelopmentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/graphic-design': typeof GraphicDesignRoute
+  '/ui-ux-design': typeof UiUxDesignRoute
+  '/website-development': typeof WebsiteDevelopmentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/graphic-design' | '/ui-ux-design' | '/website-development'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/graphic-design' | '/ui-ux-design' | '/website-development'
+  id:
+    | '__root__'
+    | '/'
+    | '/graphic-design'
+    | '/ui-ux-design'
+    | '/website-development'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GraphicDesignRoute: typeof GraphicDesignRoute
+  UiUxDesignRoute: typeof UiUxDesignRoute
+  WebsiteDevelopmentRoute: typeof WebsiteDevelopmentRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/website-development': {
+      id: '/website-development'
+      path: '/website-development'
+      fullPath: '/website-development'
+      preLoaderRoute: typeof WebsiteDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ui-ux-design': {
+      id: '/ui-ux-design'
+      path: '/ui-ux-design'
+      fullPath: '/ui-ux-design'
+      preLoaderRoute: typeof UiUxDesignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/graphic-design': {
+      id: '/graphic-design'
+      path: '/graphic-design'
+      fullPath: '/graphic-design'
+      preLoaderRoute: typeof GraphicDesignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +109,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GraphicDesignRoute: GraphicDesignRoute,
+  UiUxDesignRoute: UiUxDesignRoute,
+  WebsiteDevelopmentRoute: WebsiteDevelopmentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
