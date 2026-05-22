@@ -39,6 +39,7 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   --font-slab: "BioRhyme", serif;
+  --font-aquire: "Aquire", "Space Grotesk", sans-serif;
 
   --animate-fade-in: fade-in 0.6s ease-out;
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -379,6 +380,7 @@ body {
   .font-display { font-family: var(--font-display); }
   .font-mono { font-family: var(--font-mono); }
   .font-slab { font-family: var(--font-slab); }
+  .font-aquire { font-family: var(--font-aquire); }
 
   .text-gradient {
     background: var(--gradient-text);
