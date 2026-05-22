@@ -38,6 +38,7 @@
   --font-display: "Space Grotesk", "Inter", sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --font-slab: "BioRhyme", serif;
 
   --animate-fade-in: fade-in 0.6s ease-out;
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -144,6 +145,13 @@
   @keyframes rotate-3d {
     0% { transform: perspective(1000px) rotateY(0deg); }
     100% { transform: perspective(1000px) rotateY(360deg); }
+  }
+
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+
+  @keyframes spotlight {
+    0% { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
+    100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
   }
 }
 
@@ -370,6 +378,7 @@ body {
 @layer utilities {
   .font-display { font-family: var(--font-display); }
   .font-mono { font-family: var(--font-mono); }
+  .font-slab { font-family: var(--font-slab); }
 
   .text-gradient {
     background: var(--gradient-text);
@@ -481,6 +490,21 @@ body {
   .animate-tilt-3d { animation: var(--animate-tilt-3d); }
   .animate-float-3d { animation: var(--animate-float-3d); }
   .animate-rotate-3d { animation: var(--animate-rotate-3d); }
+  .animate-spotlight { animation: var(--animate-spotlight); }
+
+  /* Spline loader spinner */
+  .spline-loader {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 3px solid oklch(0.58 0.24 25 / 0.2);
+    border-top-color: oklch(0.58 0.24 25);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
   
   /* Delay utilities */
   .animation-delay-100 { animation-delay: 100ms; }
@@ -504,4 +528,15 @@ body {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid oklch(1 0 0 / 0.08);
+}
+
+@keyframes textShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-text-shimmer {
+  background-size: 200% auto;
+  animation: textShimmer 4s linear infinite;
 }

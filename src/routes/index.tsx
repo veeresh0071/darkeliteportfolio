@@ -6,6 +6,12 @@ import { ArrowRight, Award, Heart, Lightbulb, Target, Users2, Globe2, Mail, Phon
 import { Text3D } from "@/components/Text3D";
 import { Background3D } from "@/components/Background3D";
 import { useTiltCard } from "@/hooks/useTiltCard";
+import { SplineEmbed } from "@/components/ui/spline-embed";
+import { Spotlight } from "@/components/ui/spotlight";
+import { HeroRobot } from "@/components/HeroRobot";
+import { HeroAnimation } from "@/components/HeroAnimation";
+import { SplineScene } from "@/components/ui/splite";
+import StellarCardGallerySingle from "@/components/ui/3d-image-gallery";
 
 // SectionHeading component
 function SectionHeading({ eyebrow, title, center = true }: { eyebrow?: string; title: React.ReactNode; center?: boolean }) {
@@ -91,6 +97,13 @@ const clientLogos = [
   "/clients/Renuka-Group-Logo-1.png"
 ];
 
+const clientCards = clientLogos.map((logo, idx) => ({
+  id: String(idx + 1),
+  imageUrl: logo,
+  alt: `Client ${idx + 1}`,
+  title: logo.split('/').pop()?.replace('.png', '').replace(/[-_]/g, ' ') || `Client ${idx + 1}`
+}));
+
 export const websiteProjects = [
   { id: 1, name: "Balaji Hydraulics", image: "/website-portfolio/screencapture-balajihydraulics-in-2025-03-11-16_05_48.png", url: "https://balajihydraulics.in" },
   { id: 2, name: "Fresh Fork Bite", image: "/website-portfolio/screencapture-freshforkbite-2025-08-08-15_35_53-scaled.png", url: "https://freshforkbite.com" },
@@ -161,143 +174,176 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const ctaOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
 
-  const bgY        = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const textY      = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const charY      = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
-  const ctaOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const bgMX   = useTransform(mouseX, [-1, 1], [-15, 15]);
-  const charMX = useTransform(mouseX, [-1, 1], [20, -20]);
-  const charMY = useTransform(mouseY, [-1, 1], [10, -10]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const { innerWidth: w, innerHeight: h } = window;
-    mouseX.set((e.clientX / w) * 2 - 1);
-    mouseY.set((e.clientY / h) * 2 - 1);
+  // Premium staggered letter animations
+  const bannerContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.03,
+        delayChildren: 0.1,
+      },
+    },
   };
+
+  const letterVariants = {
+    hidden: { y: "110%", rotateX: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      rotateX: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
+  const wordDark = "DARK";
+  const wordElite = "ELITE";
+  const wordCreations = "CREATIONS";
 
   return (
     <section
       id="home"
       ref={ref}
-      onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative w-full min-h-screen overflow-hidden flex items-center"
+      style={{ background: "#000000" }}
     >
-      {/* Layer 0: Background image */}
-      <motion.div className="absolute inset-0 z-0" style={{ y: bgY, x: bgMX }}>
-        <img src="/hero-bg.png" alt="" className="w-full h-full object-cover scale-110" />
-        <div className="absolute inset-0 bg-black/55" />
-      </motion.div>
+      {/* ── White spotlight beam — exactly like the demo ── */}
+      <Spotlight
+        className="-top-40 left-0 md:left-40 md:-top-10"
+        fill="white"
+      />
 
-      {/* Layer 1: Giant text behind everything */}
-      <motion.div
-        className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none select-none"
-        style={{ y: textY }}
-      >
-        <div className="text-center px-4">
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display font-black leading-none tracking-tighter"
-            style={{
-              fontSize: "clamp(4.5rem, 14vw, 14rem)",
-              background: "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(220,38,38,0.7) 60%, rgba(220,38,38,0.1) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              filter: "drop-shadow(0 0 60px rgba(220,38,38,0.4))",
-            }}
-          >
-            DARK ELITE
-          </motion.h1>
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display font-black leading-none tracking-tighter -mt-2 md:-mt-4"
-            style={{
-              fontSize: "clamp(3rem, 9vw, 9rem)",
-              background: "linear-gradient(180deg, rgba(220,38,38,0.8) 0%, rgba(220,38,38,0.2) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              filter: "drop-shadow(0 0 80px rgba(220,38,38,0.6))",
-            }}
-          >
-            CREATIONS
-          </motion.h1>
-        </div>
-      </motion.div>
+      {/* ── Subtle red accent glow bottom-left ── */}
+      <div
+        className="absolute bottom-0 left-0 w-[600px] h-[400px] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at 20% 100%, rgba(220,38,38,0.12) 0%, transparent 60%)",
+        }}
+      />
 
-      {/* Layer 3: Right foreground character */}
-      <motion.div
-        className="absolute bottom-0 right-0 z-20 w-3/4 md:w-[52%] lg:w-[48%] max-w-[720px] pointer-events-none"
-        style={{ y: charY, x: charMX, translateY: charMY }}
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <motion.img
-          src="/hero-char.png"
-          alt=""
-          className="w-full object-contain"
-          style={{ filter: "drop-shadow(0 0 85px rgba(220,38,38,0.75)) brightness(1.2) contrast(1.08)" }}
-          animate={{
-            x: [-25, 25, -25],       // Smooth continuous right-to-left and left-to-right drift
-            y: [-12, 12, -12],       // Organic vertical breathing float
-            rotate: [-1.5, 1.5, -1.5] // Subtle premium tilt
-          }}
-          transition={{
-            duration: 9,             // Slow, premium loop duration
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </motion.div>
+      {/* ══════════════════════════════════════════
+           SPLIT LAYOUT: full-height flex row
+         ══════════════════════════════════════════ */}
+      <div className="relative z-10 w-full flex flex-col lg:flex-row min-h-screen">
 
-      {/* Layer 4: Foreground UI (Scroll Indicator Only) */}
-      <motion.div
-        className="relative z-30 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center w-full mt-auto mb-12 pointer-events-none"
-        style={{ opacity: ctaOpacity }}
-      >
+        {/* ── LEFT PANEL ── */}
         <motion.div
+          className="flex flex-col justify-center flex-1 px-8 sm:px-12 lg:px-16 xl:px-20 pt-28 pb-12 lg:pt-0 lg:pb-0 lg:max-w-[48%]"
+          style={{ y: textY }}
+        >
+          {/* Eyebrow */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="flex items-center gap-3 mb-8"
+          >
+            <span className="w-6 h-px bg-white/30" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+              Creative Agency · Belagavi
+            </span>
+          </motion.div>
+
+          <motion.h1
+            variants={bannerContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="font-slab font-black tracking-tighter leading-[0.92] mb-7 select-none"
+            style={{ fontSize: "clamp(3.8rem, 8.5vw, 8rem)" }}
+          >
+            {/* DARK */}
+            <span className="block overflow-hidden h-[1.25em] -my-2 flex flex-wrap">
+              {wordDark.split("").map((char, index) => (
+                <motion.span
+                  key={`dark-${index}`}
+                  variants={letterVariants}
+                  className="inline-block text-white transition-all duration-300 hover:text-primary hover:scale-115"
+                  style={{ transformOrigin: "bottom center" }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </span>
+
+            {/* ELITE */}
+            <span className="block overflow-hidden h-[1.25em] -my-2 flex flex-wrap">
+              {wordElite.split("").map((char, index) => (
+                <motion.span
+                  key={`elite-${index}`}
+                  variants={letterVariants}
+                  className="inline-block text-white transition-all duration-300 hover:text-primary hover:scale-115"
+                  style={{ transformOrigin: "bottom center" }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </span>
+
+            {/* CREATIONS */}
+            <span 
+              className="block overflow-hidden h-[1.35em] flex flex-wrap"
+              style={{ fontSize: "clamp(2.1rem, 5.2vw, 4.4rem)" }}
+            >
+              {wordCreations.split("").map((char, index) => (
+                <motion.span
+                  key={`creations-${index}`}
+                  variants={letterVariants}
+                  className="inline-block text-primary transition-all duration-300 hover:text-primary-glow hover:scale-115"
+                  style={{ 
+                    transformOrigin: "bottom center",
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </span>
+          </motion.h1>
+
+        </motion.div>
+
+        {/* ── RIGHT PANEL — Interactive 3D Robot ── */}
+        <motion.div
+          className="relative lg:flex-1 w-full h-[580px] lg:h-auto overflow-visible"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="flex flex-col items-center gap-2"
+          transition={{ duration: 1.2, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.span
-            animate={{ height: [40, 56, 40] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px bg-gradient-to-b from-primary to-transparent"
-            style={{ height: 40 }}
-          />
+          <div className="absolute inset-0 w-full h-full">
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full"
+            />
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
 
-      {/* Floating particles */}
-      {Array.from({ length: 18 }).map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full bg-primary/30 pointer-events-none"
-          style={{
-            width: Math.random() * 4 + 1,
-            height: Math.random() * 4 + 1,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            zIndex: 5,
-          }}
-          animate={{ y: [0, -30, 0], opacity: [0, 0.8, 0], scale: [0.5, 1.5, 0.5] }}
-          transition={{ duration: 3 + Math.random() * 4, repeat: Infinity, delay: Math.random() * 5, ease: "easeInOut" }}
+      {/* Scroll line */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-none"
+        style={{ opacity: ctaOpacity }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.3 }}
+      >
+        <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/25">Scroll</span>
+        <motion.span
+          animate={{ height: [28, 44, 28] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-px bg-gradient-to-b from-white/30 to-transparent"
+          style={{ height: 28 }}
         />
-      ))}
+      </motion.div>
     </section>
   );
 }
+
+
 
 function Marquee() {
   const items = ["HELIOS", "VECTOR AI", "LUMEN", "NORTHWIND", "ARCADIA", "OBSIDIAN", "AETHER", "PHOENIX"];
@@ -1006,54 +1052,8 @@ function Home() {
           </motion.div>
         </div>
         
-        <div className="space-y-8">
-          {/* Row 1 - Left to Right */}
-          <div className="flex animate-[marquee_50s_linear_infinite] hover:[animation-play-state:paused] whitespace-nowrap">
-            {[...clientLogos.slice(0, 11), ...clientLogos.slice(0, 11)].map((logo, i) => (
-              <motion.div 
-                key={`row1-${i}`} 
-                className="mx-4 flex-shrink-0"
-                whileHover={{ scale: 1.1, rotate: 2 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="bg-white/95 rounded-2xl p-10 h-40 w-64 flex items-center justify-center shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                  <img src={logo} alt="Client logo" className="max-h-28 max-w-full object-contain" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Row 2 - Right to Left */}
-          <div className="flex animate-[marquee-reverse_50s_linear_infinite] hover:[animation-play-state:paused] whitespace-nowrap">
-            {[...clientLogos.slice(11, 22), ...clientLogos.slice(11, 22)].map((logo, i) => (
-              <motion.div 
-                key={`row2-${i}`} 
-                className="mx-4 flex-shrink-0"
-                whileHover={{ scale: 1.1, rotate: -2 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="bg-white/95 rounded-2xl p-10 h-40 w-64 flex items-center justify-center shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                  <img src={logo} alt="Client logo" className="max-h-28 max-w-full object-contain" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Row 3 - Left to Right */}
-          <div className="flex animate-[marquee_50s_linear_infinite] hover:[animation-play-state:paused] whitespace-nowrap">
-            {[...clientLogos.slice(22), ...clientLogos.slice(22)].map((logo, i) => (
-              <motion.div 
-                key={`row3-${i}`} 
-                className="mx-4 flex-shrink-0"
-                whileHover={{ scale: 1.1, rotate: 2 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="bg-white/95 rounded-2xl p-10 h-40 w-64 flex items-center justify-center shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                  <img src={logo} alt="Client logo" className="max-h-28 max-w-full object-contain" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="w-full h-[600px] relative mt-8 z-10">
+          <StellarCardGallerySingle cards={clientCards} height="h-[600px]" showTitle={false} enableModal={false} />
         </div>
       </section>
 

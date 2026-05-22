@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import logoIcon from "./logo-icon.png";
 import logoBanner from "./image1.png";
 
 type NavLink = { hash: string; label: string };
@@ -34,15 +33,6 @@ export function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">
-
-          {/* logo-icon.png — outside the navbar pill */}
-          <Link to="/" className="flex-shrink-0 group z-10">
-            <img
-              src={logoIcon}
-              alt="Dark Elite Creations Icon"
-              className="h-14 w-14 object-contain drop-shadow-[0_0_14px_rgba(220,38,38,0.6)] transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_24px_rgba(220,38,38,0.9)]"
-            />
-          </Link>
 
           <div
             className={`relative flex flex-1 items-center rounded-2xl px-4 sm:px-6 py-3 transition-all duration-500 ${scrolled ? "glass-strong shadow-[0_8px_32px_rgba(0,0,0,0.4)]" : "bg-transparent"

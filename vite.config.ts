@@ -17,5 +17,12 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
+    chunkSizeWarningLimit: 3000,
+  },
+  ssr: {
+    // Prevent Spline (browser-only WebGL library) from being bundled for SSR
+    noExternal: [],
+    external: ["@splinetool/react-spline", "@splinetool/runtime"],
   },
 });
+
