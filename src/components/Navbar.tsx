@@ -49,7 +49,7 @@ export function Navbar() {
       scale: 1,
       filter: "blur(0px)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 15,
         stiffness: 150,
       }

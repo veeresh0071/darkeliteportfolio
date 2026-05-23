@@ -12,6 +12,7 @@ import { HeroRobot } from "@/components/HeroRobot";
 import { HeroAnimation } from "@/components/HeroAnimation";
 import { SplineScene } from "@/components/ui/splite";
 import StellarCardGallerySingle from "@/components/ui/3d-image-gallery";
+import { StarsBackground } from "@/components/ui/stars";
 
 // SectionHeading component
 function SectionHeading({ eyebrow, title, center = true }: { eyebrow?: string; title: React.ReactNode; center?: boolean }) {
@@ -226,6 +227,9 @@ function Hero() {
           background: "radial-gradient(ellipse at 20% 100%, rgba(220,38,38,0.12) 0%, transparent 60%)",
         }}
       />
+
+      {/* ── Starry Night background animation ── */}
+      <StarsBackground hyperspace={true} className="absolute inset-0 pointer-events-none z-0" />
 
       {/* ══════════════════════════════════════════
            SPLIT LAYOUT: full-height flex row
