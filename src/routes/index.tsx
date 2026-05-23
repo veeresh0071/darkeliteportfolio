@@ -213,30 +213,6 @@ function Hero() {
       className="relative w-full min-h-screen overflow-hidden flex items-center"
       style={{ background: "#000000" }}
     >
-      {/* ── GALAXY BACKGROUND — full-bleed Spline scene, behind everything ── */}
-      <div className="absolute inset-0 z-0 pointer-events-none select-none">
-        <SplineScene
-          scene="https://prod.spline.design/us3ALejTXl6usHZ7/scene.splinecode"
-          className="w-full h-full"
-        />
-        {/* Dark overlay so galaxy blends into the black theme */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.72) 60%, rgba(0,0,0,0.92) 100%)",
-          }}
-        />
-        {/* Red accent vignette matching the brand */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 30% 80%, rgba(220,38,38,0.08) 0%, transparent 55%)",
-          }}
-        />
-      </div>
-
       {/* ── White spotlight beam — exactly like the demo ── */}
       <Spotlight
         className="-top-40 left-0 md:left-40 md:-top-10"
@@ -258,7 +234,7 @@ function Hero() {
 
         {/* ── LEFT PANEL ── */}
         <motion.div
-          className="flex flex-col justify-center flex-1 px-8 sm:px-12 lg:px-16 xl:px-20 pt-28 pb-12 lg:pt-0 lg:pb-0 lg:max-w-[48%]"
+          className="relative z-20 flex flex-col justify-center flex-1 px-8 sm:px-12 lg:px-16 xl:px-20 pt-28 pb-12 lg:pt-0 lg:pb-0 lg:max-w-[48%]"
           style={{ y: textY }}
         >
           {/* Eyebrow */}
@@ -372,11 +348,13 @@ function Hero() {
             variants={bannerContainerVariants}
             initial="hidden"
             animate="visible"
-            className="font-aquire font-black leading-none mb-7 select-none"
-            style={{ fontSize: "clamp(1.9rem, 4vw, 4.6rem)" }}
+            className="font-aquire font-black leading-none mb-7 select-none inline-flex flex-col"
           >
-            {/* LINE 1: DARK ELITE — side by side, no wrap */}
-            <span className="flex items-baseline flex-nowrap whitespace-nowrap gap-x-[0.18em]">
+            {/* LINE 1: DARK ELITE — single nowrap row, big size */}
+            <span
+              className="flex items-baseline flex-nowrap whitespace-nowrap"
+              style={{ fontSize: "clamp(2.4rem, 5.5vw, 6rem)", gap: "0.25em" }}
+            >
               {/* DARK */}
               {wordDark.split("").map((char, index) => (
                 <motion.span
@@ -384,18 +362,14 @@ function Hero() {
                   variants={letterVariants}
                   className="inline-block text-white transition-all duration-300 hover:text-primary"
                   style={{ transformOrigin: "bottom center" }}
-                  whileHover={{ scale: 1.1, y: -4 }}
+                  whileHover={{ scale: 1.08, y: -4 }}
                 >
                   {char}
                 </motion.span>
               ))}
 
               {/* Space between DARK and ELITE */}
-              <motion.span
-                variants={letterVariants}
-                className="inline-block"
-                style={{ width: "0.3em" }}
-              />
+              <span style={{ display: "inline-block", width: "0.3em" }} />
 
               {/* ELITE */}
               {wordElite.split("").map((char, index) => (
@@ -404,7 +378,7 @@ function Hero() {
                   variants={letterVariants}
                   className="inline-block text-white transition-all duration-300 hover:text-primary"
                   style={{ transformOrigin: "bottom center" }}
-                  whileHover={{ scale: 1.1, y: -4 }}
+                  whileHover={{ scale: 1.08, y: -4 }}
                 >
                   {char}
                 </motion.span>
@@ -413,8 +387,13 @@ function Hero() {
 
             {/* LINE 2: CREATIONS — centered under DARK ELITE */}
             <span
-              className="flex justify-center flex-nowrap whitespace-nowrap mt-2"
-              style={{ fontSize: "clamp(1rem, 2.2vw, 2.4rem)", letterSpacing: "0.2em" }}
+              className="flex justify-center flex-nowrap whitespace-nowrap self-center"
+              style={{
+                fontSize: "clamp(1.4rem, 3.2vw, 3.5rem)",
+                letterSpacing: "0.35em",
+                marginTop: "0.15em",
+                transform: "translateX(18%)",
+              }}
             >
               {wordCreations.split("").map((char, index) => (
                 <motion.span
@@ -423,7 +402,7 @@ function Hero() {
                   animate={{
                     textShadow: [
                       "0 0 8px rgba(220,38,38,0.4)",
-                      "0 0 20px rgba(220,38,38,0.9)",
+                      "0 0 24px rgba(220,38,38,1)",
                       "0 0 8px rgba(220,38,38,0.4)",
                     ],
                   }}
@@ -432,12 +411,12 @@ function Hero() {
                       duration: 2.5,
                       repeat: Infinity,
                       ease: "easeInOut",
-                      delay: index * 0.1,
+                      delay: index * 0.08,
                     },
                   }}
                   className="inline-block text-primary transition-all duration-300 hover:text-primary-glow"
                   style={{ transformOrigin: "bottom center" }}
-                  whileHover={{ scale: 1.12, y: -4 }}
+                  whileHover={{ scale: 1.1, y: -4 }}
                 >
                   {char}
                 </motion.span>
@@ -449,7 +428,7 @@ function Hero() {
 
         {/* ── RIGHT PANEL — Interactive 3D Robot ── */}
         <motion.div
-          className="relative lg:flex-1 w-full h-[580px] lg:h-auto overflow-visible"
+          className="relative z-10 lg:flex-1 w-full h-[580px] lg:h-auto overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
