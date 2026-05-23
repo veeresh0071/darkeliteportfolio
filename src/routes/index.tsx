@@ -213,6 +213,30 @@ function Hero() {
       className="relative w-full min-h-screen overflow-hidden flex items-center"
       style={{ background: "#000000" }}
     >
+      {/* ── GALAXY BACKGROUND — full-bleed Spline scene, behind everything ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none select-none">
+        <SplineScene
+          scene="https://prod.spline.design/us3ALejTXl6usHZ7/scene.splinecode"
+          className="w-full h-full"
+        />
+        {/* Dark overlay so galaxy blends into the black theme */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.72) 60%, rgba(0,0,0,0.92) 100%)",
+          }}
+        />
+        {/* Red accent vignette matching the brand */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 30% 80%, rgba(220,38,38,0.08) 0%, transparent 55%)",
+          }}
+        />
+      </div>
+
       {/* ── White spotlight beam — exactly like the demo ── */}
       <Spotlight
         className="-top-40 left-0 md:left-40 md:-top-10"
@@ -244,60 +268,176 @@ function Hero() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="flex items-center gap-3 mb-8"
           >
-            <span className="w-6 h-px bg-white/30" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
-              Creative Agency · Belagavi
-            </span>
+            {/* Animated line */}
+            <motion.span
+              className="h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent"
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 28, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            />
+
+            {/* Aquire-styled eyebrow with per-letter stagger + shimmer */}
+            <motion.span
+              className="flex items-center gap-[0.18em]"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.04, delayChildren: 0.45 },
+                },
+              }}
+            >
+              {"CREATIVE AGENCY".split("").map((char, i) => (
+                <motion.span
+                  key={`ca-${i}`}
+                  variants={{
+                    hidden: { opacity: 0, y: 6, filter: "blur(3px)" },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      filter: "blur(0px)",
+                      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+                    },
+                  }}
+                  className={`font-aquire text-[10px] uppercase tracking-[0.28em] select-none ${
+                    char === " " ? "w-[0.4em]" : "text-white/50"
+                  }`}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+
+              {/* Glowing separator dot */}
+              <motion.span
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.1, duration: 0.4, ease: "backOut" }}
+                className="inline-block mx-[0.3em]"
+              >
+                <motion.span
+                  className="block w-[3px] h-[3px] rounded-full bg-primary"
+                  animate={{
+                    boxShadow: [
+                      "0 0 4px rgba(220,38,38,0.6)",
+                      "0 0 10px rgba(220,38,38,1)",
+                      "0 0 4px rgba(220,38,38,0.6)",
+                    ],
+                  }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </motion.span>
+
+              {"BELAGAVI".split("").map((char, i) => (
+                <motion.span
+                  key={`bg-${i}`}
+                  variants={{
+                    hidden: { opacity: 0, y: 6, filter: "blur(3px)" },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      filter: "blur(0px)",
+                      transition: {
+                        duration: 0.5,
+                        ease: [0.22, 1, 0.36, 1],
+                        delay: 0.5 + i * 0.04,
+                      },
+                    },
+                  }}
+                  animate={{
+                    color: [
+                      "rgba(255,255,255,0.35)",
+                      "rgba(220,38,38,0.75)",
+                      "rgba(255,255,255,0.35)",
+                    ],
+                  }}
+                  transition={{
+                    color: {
+                      duration: 3.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.15,
+                    },
+                  }}
+                  className="font-aquire text-[10px] uppercase tracking-[0.28em] select-none"
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </motion.span>
           </motion.div>
 
           <motion.h1
             variants={bannerContainerVariants}
             initial="hidden"
             animate="visible"
-            className="font-slab font-black tracking-tighter leading-[0.92] mb-7 select-none"
-            style={{ fontSize: "clamp(3.8rem, 8.5vw, 8rem)" }}
+            className="font-aquire font-black leading-none mb-7 select-none"
+            style={{ fontSize: "clamp(1.9rem, 4vw, 4.6rem)" }}
           >
-            {/* DARK */}
-            <span className="block overflow-hidden h-[1.25em] -my-2 flex flex-wrap">
+            {/* LINE 1: DARK ELITE — side by side, no wrap */}
+            <span className="flex items-baseline flex-nowrap whitespace-nowrap gap-x-[0.18em]">
+              {/* DARK */}
               {wordDark.split("").map((char, index) => (
                 <motion.span
                   key={`dark-${index}`}
                   variants={letterVariants}
-                  className="inline-block text-white transition-all duration-300 hover:text-primary hover:scale-115"
+                  className="inline-block text-white transition-all duration-300 hover:text-primary"
                   style={{ transformOrigin: "bottom center" }}
+                  whileHover={{ scale: 1.1, y: -4 }}
                 >
                   {char}
                 </motion.span>
               ))}
-            </span>
 
-            {/* ELITE */}
-            <span className="block overflow-hidden h-[1.25em] -my-2 flex flex-wrap">
+              {/* Space between DARK and ELITE */}
+              <motion.span
+                variants={letterVariants}
+                className="inline-block"
+                style={{ width: "0.3em" }}
+              />
+
+              {/* ELITE */}
               {wordElite.split("").map((char, index) => (
                 <motion.span
                   key={`elite-${index}`}
                   variants={letterVariants}
-                  className="inline-block text-white transition-all duration-300 hover:text-primary hover:scale-115"
+                  className="inline-block text-white transition-all duration-300 hover:text-primary"
                   style={{ transformOrigin: "bottom center" }}
+                  whileHover={{ scale: 1.1, y: -4 }}
                 >
                   {char}
                 </motion.span>
               ))}
             </span>
 
-            {/* CREATIONS */}
-            <span 
-              className="block overflow-hidden h-[1.35em] flex flex-wrap"
-              style={{ fontSize: "clamp(2.1rem, 5.2vw, 4.4rem)" }}
+            {/* LINE 2: CREATIONS — centered under DARK ELITE */}
+            <span
+              className="flex justify-center flex-nowrap whitespace-nowrap mt-2"
+              style={{ fontSize: "clamp(1rem, 2.2vw, 2.4rem)", letterSpacing: "0.2em" }}
             >
               {wordCreations.split("").map((char, index) => (
                 <motion.span
                   key={`creations-${index}`}
                   variants={letterVariants}
-                  className="inline-block text-primary transition-all duration-300 hover:text-primary-glow hover:scale-115"
-                  style={{ 
-                    transformOrigin: "bottom center",
+                  animate={{
+                    textShadow: [
+                      "0 0 8px rgba(220,38,38,0.4)",
+                      "0 0 20px rgba(220,38,38,0.9)",
+                      "0 0 8px rgba(220,38,38,0.4)",
+                    ],
                   }}
+                  transition={{
+                    textShadow: {
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.1,
+                    },
+                  }}
+                  className="inline-block text-primary transition-all duration-300 hover:text-primary-glow"
+                  style={{ transformOrigin: "bottom center" }}
+                  whileHover={{ scale: 1.12, y: -4 }}
                 >
                   {char}
                 </motion.span>
